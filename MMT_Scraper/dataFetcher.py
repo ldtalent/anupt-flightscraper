@@ -10,7 +10,7 @@ from selenium.webdriver.support import expected_conditions as EC
 # User defined variables for data retreival
 origin = "BOM" 				# Origin airport code
 destin = "DEL" 				# Destination airport code
-trDate = "30/05/2019"		# Date for which data to be extracted.
+trDate = sys.argv[1]			# Date as 1st command line argument.
 
 """ The following is the Base Url for fetching data from MakeMyTrip Website.
 	This URL appears in the search bar after origin, destination and date inputs on the landing page.
@@ -45,14 +45,14 @@ try:
 	soupBody = BeautifulSoup(body) # Parse the inner HTML using BeautifulSoup
 
 	# Extract the required tags 
-	spanFlightName = soupBody.findAll("span", {"class": "airways-name "}) 		# Tags with Flight Name
-	pFlightCode = soupBody.findAll("p", {"class": "fli-code"})					# Tags with Flight Code
+	spanFlightName = soupBody.findAll("span", {"class": "airways-name "}) 			# Tags with Flight Name
+	pFlightCode = soupBody.findAll("p", {"class": "fli-code"})				# Tags with Flight Code
 	divDeptTime = soupBody.findAll("div", {"class": "dept-time"})				# Tags with Departure Time
-	pDeptCity = soupBody.findAll("p", {"class": "dept-city"})					# Tags with Departure City
+	pDeptCity = soupBody.findAll("p", {"class": "dept-city"})				# Tags with Departure City
 	pFlightDuration = soupBody.findAll("p", {"class": "fli-duration"})			# Tags with Flight Duration
-	pArrivalTime = soupBody.findAll("p", {"class": "reaching-time append_bottom3"}) # Tags with Arrival Time
+	pArrivalTime = soupBody.findAll("p", {"class": "reaching-time append_bottom3"}) 	# Tags with Arrival Time
 	pArrivalCity = soupBody.findAll("p", {"class": "arrival-city"})				# Tags with Arrival City
-	spanFlightCost = soupBody.findAll("span", {"class": "actual-price"})		# Tags with Flight Cost
+	spanFlightCost = soupBody.findAll("span", {"class": "actual-price"})			# Tags with Flight Cost
 
 	
 	# Data Headers
